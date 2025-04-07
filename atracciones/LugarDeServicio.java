@@ -24,4 +24,5 @@ public class LugarDeServicio extends Atraccion {
     public String getDescripcion() {
         return super.getDescripcion();
     }
+    //okay
 }
