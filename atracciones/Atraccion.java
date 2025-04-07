@@ -32,5 +32,29 @@ public class Atraccion {
     public String getExclusividad() {
         return tipoExclusividad;
     }
+    
+    public void setLugar(int lugar) {
+		this.lugar = lugar;
+	}
+    
+    public void setcapacidadMax(int capacidadMax) {
+    	this.capacidadMax = capacidadMax;
+    }
+    
+    public void setminimoEmpleados(int minimoEmpleados) {
+    	this.minimoEmpleados = minimoEmpleados;
+    }
+    
+    public void setExclusividad(String tipoExclusividad) {
+    	this.tipoExclusividad = tipoExclusividad;
+    }
+    
+    public void setTiempoDisponibleEnDias(int tiempoDisponibleEnDias) {
+    	this.tiempoDisponibleEnDias = tiempoDisponibleEnDias;
+    }
+    
+    public void setDescripcion(String descripcion) { 
+    	this.descripcion = descripcion; 
+    }
 
 }
