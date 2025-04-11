@@ -34,11 +34,18 @@ public class Atraccion {
     }
     
     public void setLugar(int lugar) {
-		this.lugar = lugar;
+    	if (lugar >= 0) {
+    		this.lugar = lugar;
+    	}
+    	else {
+    		System.out.println("No puede ser un lugar en negativos");
+    	}
 	}
     
     public void setcapacidadMax(int capacidadMax) {
-    	this.capacidadMax = capacidadMax;
+    	if (capacidadMax > 0) {
+    		this.capacidadMax = capacidadMax;
+    	}
     }
     
     public void setminimoEmpleados(int minimoEmpleados) {

@@ -11,4 +11,8 @@ public class Evento extends Cultural {
         esEvento, edadMinima, climaExtremo);
   this.fechaYhora = fechaYhora;
 	}
+	
+	public void setfechaYhora(LocalDateTime fechaYhora) {
+		this.fechaYhora = fechaYhora;
+	}
 }

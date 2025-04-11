@@ -8,15 +8,12 @@ public class LugarDeServicio extends Atraccion {
 			boolean esEvento, int edadMinima, boolean climaExtremo) {
 		super(lugar, capacidadMax, minimoEmpleados, tipoExclusividad, tiempoDisponibleEnDias,
 				descripcion);
-		this.tipo = tipo;
 	}
 
-    // Getters
     public String getTipo() {
         return tipo;
     }
 
-    // Setter
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
@@ -24,5 +21,4 @@ public class LugarDeServicio extends Atraccion {
     public String getDescripcion() {
         return super.getDescripcion();
     }
-    //okay
 }
