@@ -42,13 +42,13 @@ public class Atraccion {
     	}
 	}
     
-    public void setcapacidadMax(int capacidadMax) {
+    public void setCapacidadMax(int capacidadMax) {
     	if (capacidadMax > 0) {
     		this.capacidadMax = capacidadMax;
     	}
     }
     
-    public void setminimoEmpleados(int minimoEmpleados) {
+    public void setMinimoEmpleados(int minimoEmpleados) {
     	this.minimoEmpleados = minimoEmpleados;
     }
     

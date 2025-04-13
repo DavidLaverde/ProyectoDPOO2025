@@ -1,18 +1,21 @@
 package personas;
 
 import java.util.ArrayList;
+import atracciones.Atraccion;
+import atracciones.Cultural;
+import atracciones.Evento;
+import atracciones.LugarDeServicio;
+import atracciones.Mecanica;
 
 public class Administrador {
     private int id;
     private String nombre;
 
-    // Constructor
     public Administrador(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;
     }
 
-    // Métodos de acceso
     public int getId() {
         return id;
     }
@@ -21,8 +24,7 @@ public class Administrador {
         return nombre;
     }
 
-    // ------------ MÉTODOS PARA ATRACCIONES ------------
-
+    //METODOS PARA ATRACCIONES
     public void añadirAtraccion(ArrayList<Atraccion> atracciones, Atraccion nuevaAtraccion) {
         atracciones.add(nuevaAtraccion);
     }
@@ -31,16 +33,15 @@ public class Administrador {
         atracciones.remove(atraccion);
     }
 
-    public void editarAtraccion(Atraccion atraccion, int capacidadMax, int minEmpleados, 
-                                 int tipoDiscapacidad, int tiempoDuracion, String descripcion) {
+    public void editarAtraccion(Atraccion atraccion, int capacidadMax, int minimoEmpleados, 
+                                 int tiempoDisponibleEnDias, String descripcion) {
         atraccion.setCapacidadMax(capacidadMax);
-        atraccion.setMinEmpleados(minEmpleados);
-        atraccion.setTipoDiscapacidad(tipoDiscapacidad);
-        atraccion.setTiempoDuracion(tiempoDuracion);
+        atraccion.setMinimoEmpleados(minimoEmpleados);
+        atraccion.setTiempoDisponibleEnDias(tiempoDisponibleEnDias);
         atraccion.setDescripcion(descripcion);
     }
 
-    // ------------ MÉTODOS PARA EMPLEADOS ------------
+    //METODOS PARA EMPLEADOS
 
     public void añadirEmpleado(ArrayList<Empleado> empleados, Empleado nuevoEmpleado) {
         empleados.add(nuevoEmpleado);

@@ -12,7 +12,7 @@ public class Evento extends Cultural {
   this.fechaYhora = fechaYhora;
 	}
 	
-	public void setfechaYhora(LocalDateTime fechaYhora) {
+	public void setFechaYhora(LocalDateTime fechaYhora) {
 		this.fechaYhora = fechaYhora;
 	}
 }

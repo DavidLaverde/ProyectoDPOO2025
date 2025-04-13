@@ -24,15 +24,15 @@ public class Cultural extends Atraccion {
 		}
 	}
 	
-	public void setedadMinima(int edadMinima) {
+	public void setEdadMinima(int edadMinima) {
 		this.edadMinima = edadMinima;
 	}	
 	
-	public void setclimaExtremo(boolean climaExtremo) {
+	public void setClimaExtremo(boolean climaExtremo) {
 		this.climaExtremo = climaExtremo;
 	}
 	
-	public void setesEvento(boolean esEvento) {
+	public void setEsEvento(boolean esEvento) {
 		this.esEvento = esEvento;
 	}
 }
