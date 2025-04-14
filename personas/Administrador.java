@@ -64,7 +64,6 @@ public class Administrador {
 
     public void editarEmpleado(
             Empleado empleado,
-            int idEmpleado,
         	int lugarDeTrabajo,
         	boolean cocinero,
         	ArrayList<String> cargo,
@@ -72,7 +71,6 @@ public class Administrador {
         	ArrayList<String> manejoMecAlto,
         	ArrayList<String> turno
         ) {
-    		empleado.setidEmpleado(idEmpleado);
             empleado.setlugarDeTrabajo(lugarDeTrabajo);
             empleado.setcocinero(cocinero);
             empleado.setcargo(cargo);

@@ -82,22 +82,82 @@ public class Main {
                     break;
 
                 case 3:
-                    System.out.println("ID del empleado a editar:");
-                    int idEdit = scanner.nextInt();
-                    Empleado empEdit = buscarEmpleado(empleados, idEdit);
-                    if (empEdit != null) {
-                        System.out.println("Nuevo lugar de trabajo:");
-                        int nuevoLugar = scanner.nextInt();
-                        scanner.nextLine();
-                        System.out.println("Nuevo cargo:");
-                        String nuevoCargo = scanner.nextLine();
-                        System.out.println("¿Es bilingüe? (true/false):");
-                        boolean nuevoBilingue = scanner.nextBoolean();
-                        admin.editarEmpleado(empEdit, nuevoLugar, nuevoCargo, nuevoBilingue);
-                    } else {
-                        System.out.println("Empleado no encontrado.");
-                    }
-                    break;
+                	System.out.println("Ingrese ID del empleado que desea editar:");
+                	int idEditar = scanner.nextInt();
+                	scanner.nextLine(); // Limpiar el buffer
+
+                	Empleado empEditar = null;
+                	for (Empleado e : empleados) {
+                	    if (e.getidEmpleado() == idEditar) {
+                	        empEditar = e;
+                	        break;
+                	    }
+                	}
+
+                	if (empEditar == null) {
+                	    System.out.println("Empleado no encontrado.");
+                	    break;
+                	}
+
+                	// Editar lugar de trabajo
+                	System.out.println("Lugar de trabajo actual: " + empEditar.getlugarDeTrabajo());
+                	System.out.println("Nuevo lugar de trabajo:");
+                	int nuevoLugar = scanner.nextInt();
+                	scanner.nextLine();
+
+                	// Editar si es cocinero
+                	System.out.println("¿Es cocinero? (true/false). Actual: " + empEditar.getcocinero());
+                	boolean nuevoCocinero = scanner.nextBoolean();
+                	scanner.nextLine();
+
+                	// Editar cargos
+                	ArrayList<String> nuevosCargos = new ArrayList<>();
+                	String nuevoCargo;
+                	System.out.println("Ingrese nuevos cargos (escriba 'fin' para terminar). Actual: " + empEditar.getcargo());
+                	do {
+                	    nuevoCargo = scanner.nextLine();
+                	    if (!nuevoCargo.equalsIgnoreCase("fin")) {
+                	        nuevosCargos.add(nuevoCargo);
+                	    }
+                	} while (!nuevoCargo.equalsIgnoreCase("fin"));
+
+                	// Editar manejo de mecánicas
+                	System.out.println("¿Puede manejar mecánicas? (true/false)" );
+                	boolean nuevoManejoMec = scanner.nextBoolean();
+                	scanner.nextLine();
+
+                	// Editar atracciones mecánicas complejas
+                	ArrayList<String> nuevosMecanicosAltos = new ArrayList<>();
+                	String nuevaMecanica;
+                	System.out.println("Ingrese atracciones mecánicas complejas que pueda manejar (escriba 'fin' para terminar):");
+                	do {
+                	    nuevaMecanica = scanner.nextLine();
+                	    if (!nuevaMecanica.equalsIgnoreCase("fin")) {
+                	        nuevosMecanicosAltos.add(nuevaMecanica);
+                	    }
+                	} while (!nuevaMecanica.equalsIgnoreCase("fin"));
+
+                	// Editar turnos
+                	ArrayList<String> nuevosTurnos = new ArrayList<>();
+                	String nuevoTurno;
+                	System.out.println("Ingrese turnos disponibles (escriba 'fin' para terminar):");
+                	do {
+                	    nuevoTurno = scanner.nextLine();
+                	    if (!nuevoTurno.equalsIgnoreCase("fin")) {
+                	        nuevosTurnos.add(nuevoTurno);
+                	    }
+                	} while (!nuevoTurno.equalsIgnoreCase("fin"));
+
+                	// Actualizar datos del empleado
+                	empEditar.setlugarDeTrabajo(nuevoLugar);
+                	empEditar.setcocinero(nuevoCocinero);
+                	empEditar.setcargo(nuevosCargos);
+                	empEditar.setmanejoMec(nuevoManejoMec);
+                	empEditar.setmanejoMecAlto(nuevosMecanicosAltos);
+                	empEditar.setturno(nuevosTurnos);
+
+                	System.out.println("Empleado actualizado correctamente.");
+                	break;
 
                 case 4:
                     System.out.println("ID del empleado a eliminar:");
@@ -113,7 +173,7 @@ public class Main {
                 case 5:
                     System.out.println("--- Atracciones ---");
                     for (Atraccion a : atracciones) {
-                        System.out.println("Lugar: " + a.getLugar() + " | Descripción: " + a.getDescripcion());
+                        System.out.println("Lugar: " + a.getlugar() + " | Descripción: " + a.getdescripcion());
                     }
                     break;
 
@@ -184,14 +244,14 @@ public class Main {
     // Métodos auxiliares
     public static Empleado buscarEmpleado(ArrayList<Empleado> empleados, int id) {
         for (Empleado e : empleados) {
-            if (e.getId() == id) return e;
+            if (e.getidEmpleado() == id) return e;
         }
         return null;
     }
 
     public static Atraccion buscarAtraccion(ArrayList<Atraccion> atracciones, int lugar) {
         for (Atraccion a : atracciones) {
-            if (a.getLugar() == lugar) return a;
+            if (a.getlugar() == lugar) return a;
         }
         return null;
     }
