@@ -12,6 +12,12 @@ public class Evento extends Cultural {
   this.fechaYhora = fechaYhora;
 	}
 	
+	//Geters
+	
+	public LocalDateTime getfechaYhora() {
+		return fechaYhora;
+	}
+	
 	public void setFechaYhora(LocalDateTime fechaYhora) {
 		this.fechaYhora = fechaYhora;
 	}

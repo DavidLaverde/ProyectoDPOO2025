@@ -27,23 +27,53 @@ public class Mecanica extends Atraccion {
         }
    }
     
-    public void setAlturaMax(double alturaMax) {
-    	this.alturaMax = alturaMax;
+    //Geters
+    public double getalturaMax() {
+    	return alturaMax;
     }
     
-    public void setAlturaMin(double alturaMin) {
-    	this.alturaMin = alturaMin;
+    public double getalturaMin() {
+    	return alturaMin;
     }
     
-    public void setPesoMax(double pesoMax) {
-    	this.pesoMax = pesoMax;
+    public double getpesoMax() {
+    	return pesoMax;
     }
     
-    public void setPesoMin(double pesoMin) {
-    	this.pesoMin = pesoMin;
+    public double getpesoMin() {
+    	return pesoMin;
     }
     
-    public void setNivelRiesgo(String nivelRiesgo) {
+    public String nivelRiesgo() {
+    	return nivelRiesgo;
+    }
+    
+    //Seters Publicos
+    public void setalturaMax(double alturaMax) {
+    	if (alturaMax > 0) {
+    		this.alturaMax = alturaMax;
+    	}
+    }
+    
+    public void setalturaMin(double alturaMin) {
+    	if (alturaMin > 0) {
+    		this.alturaMin = alturaMin;
+    	}
+    }
+    
+    public void setpesoMax(double pesoMax) {
+    	if (pesoMax > 0) {
+    		this.pesoMax = pesoMax;
+    	}
+    }
+    
+    public void setpesoMin(double pesoMin) {
+    	if (pesoMin > 0) {
+    		this.pesoMin = pesoMin;
+    	}
+    }
+    
+    public void setnivelRiesgo(String nivelRiesgo) {
     	this.nivelRiesgo = nivelRiesgo;
     }
 }

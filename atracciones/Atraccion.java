@@ -17,50 +17,61 @@ public class Atraccion {
         this.descripcion = descripcion;
 	}
 	
-	public String getDescripcion() {
-        return descripcion;
-    }
-
-    public int getTiempoDisponible() {
-        return tiempoDisponibleEnDias;
-    }
-
-    public int getLugar() {
-        return lugar;
-    }
-
-    public String getExclusividad() {
-        return tipoExclusividad;
-    }
+	//Getters publicos
+	public int getlugar() {
+		return lugar;
+	}
+	
+	public int getcapacidadMax() {
+		return capacidadMax;
+	}
+	
+	public int getminimoEmpleados() {
+		return minimoEmpleados;
+	}    
+	
+	public String gettipoExclusividad() {
+		return tipoExclusividad;
+	}
+	
+	public int gettiempoDisponibleEnDias() {
+		return tiempoDisponibleEnDias;
+	}
+	
+	public String getdescripcion() {
+		return descripcion;
+	}
     
-    public void setLugar(int lugar) {
+    //Seters Publicos
+    public void setlugar(int lugar) {
     	if (lugar >= 0) {
     		this.lugar = lugar;
     	}
-    	else {
-    		System.out.println("No puede ser un lugar en negativos");
-    	}
 	}
     
-    public void setCapacidadMax(int capacidadMax) {
+    public void setcapacidadMax(int capacidadMax) {
     	if (capacidadMax > 0) {
     		this.capacidadMax = capacidadMax;
     	}
     }
     
-    public void setMinimoEmpleados(int minimoEmpleados) {
-    	this.minimoEmpleados = minimoEmpleados;
+    public void setminimoEmpleados(int minimoEmpleados) {
+    	if (minimoEmpleados > 0) {
+    		this.minimoEmpleados = minimoEmpleados;
+    	}
     }
     
-    public void setExclusividad(String tipoExclusividad) {
+    public void settipoExclusividad(String tipoExclusividad) {
     	this.tipoExclusividad = tipoExclusividad;
     }
     
-    public void setTiempoDisponibleEnDias(int tiempoDisponibleEnDias) {
-    	this.tiempoDisponibleEnDias = tiempoDisponibleEnDias;
+    public void settiempoDisponibleEnDias(int tiempoDisponibleEnDias) {
+    	if (tiempoDisponibleEnDias > 0) {
+    		this.tiempoDisponibleEnDias = tiempoDisponibleEnDias;
+    	}
     }
     
-    public void setDescripcion(String descripcion) { 
+    public void setdescripcion(String descripcion) { 
     	this.descripcion = descripcion; 
     }
 

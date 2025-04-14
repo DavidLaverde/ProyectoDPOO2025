@@ -9,16 +9,14 @@ public class LugarDeServicio extends Atraccion {
 		super(lugar, capacidadMax, minimoEmpleados, tipoExclusividad, tiempoDisponibleEnDias,
 				descripcion);
 	}
-
+    
+    //Geters
     public String getTipo() {
         return tipo;
     }
 
+    //Seters
     public void setTipo(String tipo) {
         this.tipo = tipo;
-    }
-
-    public String getDescripcion() {
-        return super.getDescripcion();
     }
 }

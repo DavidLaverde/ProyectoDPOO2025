@@ -24,8 +24,24 @@ public class Cultural extends Atraccion {
 		}
 	}
 	
+	//Geters
+	public boolean getesEvento() {
+		return esEvento;
+	}
+	
+	public int edadMinima() {
+		return edadMinima;
+	}
+	
+	public boolean getclimaExtremo() {
+		return climaExtremo;
+	}
+	
+	//Seters publicos
 	public void setEdadMinima(int edadMinima) {
-		this.edadMinima = edadMinima;
+		if(edadMinima > 0) {
+			this.edadMinima = edadMinima;
+		}
 	}	
 	
 	public void setClimaExtremo(boolean climaExtremo) {
