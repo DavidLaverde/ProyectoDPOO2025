@@ -3,9 +3,13 @@ package main;
 import personas.Administrador;
 import personas.Empleado;
 import atracciones.Atraccion;
+import atracciones.Mecanica;
+import atracciones.Cultural;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDateTime;
 
 public class Main {
@@ -171,13 +175,23 @@ public class Main {
                     break;
 
                 case 5:
-                    System.out.println("--- Atracciones ---");
-                    for (Atraccion a : atracciones) {
-                        System.out.println("Lugar: " + a.getlugar() + " | Descripción: " + a.getdescripcion());
-                    }
-                    break;
+                	System.out.println("--- Atracciones Registradas ---");
+                	for (Atraccion a : atracciones) {
+                	    String tipo = a instanceof Mecanica ? "Mecánica" :
+                	                 a instanceof Cultural ? "Cultural" : "Desconocido";
+                	    System.out.println("[" + tipo + "] Lugar: " + a.getlugar() + " | Descripción: " + a.getdescripcion());
+                	}
 
                 case 6:
+                	System.out.println("Tipo de atracción (1. Mecánica | 2. Cultural):");
+                	int tipo = scanner.nextInt();
+                	scanner.nextLine();
+
+                	if (tipo != 1 && tipo != 2) {
+                	    System.out.println("❌ Tipo no válido. Debe ser 1 (Mecánica) o 2 (Cultural).");
+                	    break;
+                	}
+
                 	System.out.println("Lugar:");
                 	int lugarAtr = scanner.nextInt();
 
@@ -186,8 +200,7 @@ public class Main {
 
                 	System.out.println("Mínimo de empleados:");
                 	int minEmp = scanner.nextInt();
-
-                	scanner.nextLine(); // Limpiar buffer antes de Strings
+                	scanner.nextLine();
 
                 	System.out.println("Tipo de exclusividad (Familiar, Oro, Diamante):");
                 	String tipoExclusividad = scanner.nextLine();
@@ -198,13 +211,50 @@ public class Main {
 
                 	System.out.println("Descripción de la atracción:");
                 	String desc = scanner.nextLine();
+                	
+                	System.out.println("¿Es un evento de temporada? (true/false):");
+                	boolean esEvento = scanner.nextBoolean();
 
-                	Atraccion nuevaAtr = new Atraccion(lugarAtr, cap, minEmp, tipoExclusividad, tiempo, desc);
-                	admin.añadirAtraccion(atracciones, nuevaAtr);
+                	System.out.println("Edad mínima para ingresar:");
+                	int edadMinima = scanner.nextInt();
 
-                	System.out.println("✅ Atracción creada exitosamente.");
+                	System.out.println("¿Se ve afectada por clima extremo? (true/false):");
+                	boolean climaExtremo = scanner.nextBoolean();
+                	scanner.nextLine();
+
+                	if (tipo == 1) {
+                	    // ATRACCIÓN MECÁNICA
+                	    System.out.println("Altura mínima (m):");
+                	    double alturaMin = scanner.nextDouble();
+
+                	    System.out.println("Altura máxima (m):");
+                	    double alturaMax = scanner.nextDouble();
+
+                	    System.out.println("Peso mínimo (kg):");
+                	    double pesoMin = scanner.nextDouble();
+
+                	    System.out.println("Peso máximo (kg):");
+                	    double pesoMax = scanner.nextDouble();
+                	    scanner.nextLine();
+
+                	    System.out.println("Nivel de riesgo (medio / alto):");
+                	    String riesgo = scanner.nextLine();
+
+                	    Mecanica nuevaMec = new Mecanica(
+                	        lugarAtr, cap, minEmp, tipoExclusividad, tiempo, desc,
+                	        alturaMax, alturaMin, pesoMax, pesoMin, riesgo
+                	    );
+                	    admin.añadirAtraccion(atracciones, nuevaMec);
+                	    System.out.println("Atracción mecánica creada exitosamente.");
+
+                	} else {
+                	    // ATRACCIÓN CULTURAL
+                	    Cultural nuevaCultural = new Cultural(lugarAtr, cap, minEmp,
+                	        tipoExclusividad, tiempo, desc, esEvento, edadMinima, climaExtremo);
+                	    admin.añadirAtraccion(atracciones, nuevaCultural);
+                	    System.out.println("Atracción cultural creada exitosamente.");
+                	}
                 	break;
-
 
                 case 7:
                 	System.out.println("Ingrese el número de lugar de la atracción que desea editar:");
@@ -274,11 +324,12 @@ public class Main {
                     break;
 
                 case 0:
+                    System.out.println("Guardando atracciones en archivo...");
+
+                    guardarAtracciones(atracciones, "atracciones.txt");
+
                     System.out.println("Saliendo del programa. 👋");
                     break;
-
-                default:
-                    System.out.println("Opción no válida.");
             }
 
         } while (opcion != 0);
@@ -300,5 +351,28 @@ public class Main {
         }
         return null;
     }
+    
+    public static void guardarAtracciones(ArrayList<Atraccion> atracciones, String nombreArchivo) {
+        try (PrintWriter writer = new PrintWriter(nombreArchivo)) {
+            for (Atraccion a : atracciones) {
+                if (a instanceof Mecanica) {
+                    Mecanica m = (Mecanica) a;
+                    writer.println("M;" + m.getlugar() + ";" + m.getcapacidadMax() + ";" + m.getminimoEmpleados()
+                            + ";" + m.gettipoExclusividad() + ";" + m.gettiempoDisponibleEnDias() + ";" + m.getdescripcion()
+                            + ";" + m.getalturaMax() + ";" + m.getalturaMin() + ";" + m.getpesoMax() + ";" + m.getpesoMin()
+                            + ";" + m.nivelRiesgo());
+                } else if (a instanceof Cultural) {
+                    Cultural c = (Cultural) a;
+                    writer.println("C;" + c.getlugar() + ";" + c.getcapacidadMax() + ";" + c.getminimoEmpleados()
+                            + ";" + c.gettipoExclusividad() + ";" + c.gettiempoDisponibleEnDias() + ";" + c.getdescripcion()
+                            + ";" + c.getedadMinima());
+                }
+            }
+            System.out.println("✅ Atracciones guardadas exitosamente en: " + nombreArchivo);
+        } catch (IOException e) {
+            System.out.println("❌ Error al guardar las atracciones: " + e.getMessage());
+        }
+    }
+
 
 }

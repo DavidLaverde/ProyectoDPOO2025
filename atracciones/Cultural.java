@@ -29,7 +29,7 @@ public class Cultural extends Atraccion {
 		return esEvento;
 	}
 	
-	public int edadMinima() {
+	public int getedadMinima() {
 		return edadMinima;
 	}
 	
