@@ -1,6 +1,6 @@
 package Venta;
 
-public class Pago.java
+public class Pago {
     private int idTransaccion;
     private String tipoTicket;
     private String tipoDescuento;
