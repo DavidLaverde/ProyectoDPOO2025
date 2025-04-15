@@ -308,7 +308,7 @@ public class Main {
                 	String nuevaDescripcion = scanner.nextLine();
                 	atraccionEditar.setdescripcion(nuevaDescripcion);
 
-                	System.out.println("\n✅ Atracción actualizada exitosamente.");
+                	System.out.println("\n Atracción actualizada exitosamente.");
                 	break;
 
 
@@ -328,7 +328,7 @@ public class Main {
 
                     guardarAtracciones(atracciones, "atracciones.txt");
 
-                    System.out.println("Saliendo del programa. 👋");
+                    System.out.println("Saliendo del programa. ");
                     break;
             }
 
@@ -352,27 +352,42 @@ public class Main {
         return null;
     }
     
-    public static void guardarAtracciones(ArrayList<Atraccion> atracciones, String nombreArchivo) {
-        try (PrintWriter writer = new PrintWriter(nombreArchivo)) {
+    public static void guardarAtracciones(ArrayList<Atraccion> atracciones, String atraccionesP) {
+        try (PrintWriter writer = new PrintWriter(atraccionesP)) {
             for (Atraccion a : atracciones) {
                 if (a instanceof Mecanica) {
                     Mecanica m = (Mecanica) a;
-                    writer.println("M;" + m.getlugar() + ";" + m.getcapacidadMax() + ";" + m.getminimoEmpleados()
-                            + ";" + m.gettipoExclusividad() + ";" + m.gettiempoDisponibleEnDias() + ";" + m.getdescripcion()
-                            + ";" + m.getalturaMax() + ";" + m.getalturaMin() + ";" + m.getpesoMax() + ";" + m.getpesoMin()
-                            + ";" + m.nivelRiesgo());
+                    writer.println("M;" +
+                            m.getlugar() + ";" +
+                            m.getcapacidadMax() + ";" +
+                            m.getminimoEmpleados() + ";" +
+                            m.gettipoExclusividad() + ";" +
+                            m.gettiempoDisponibleEnDias() + ";" +
+                            m.getdescripcion() + ";" +
+                            m.getalturaMax() + ";" +
+                            m.getalturaMin() + ";" +
+                            m.getpesoMax() + ";" +
+                            m.getpesoMin() + ";" +
+                            m.nivelRiesgo());
                 } else if (a instanceof Cultural) {
                     Cultural c = (Cultural) a;
-                    writer.println("C;" + c.getlugar() + ";" + c.getcapacidadMax() + ";" + c.getminimoEmpleados()
-                            + ";" + c.gettipoExclusividad() + ";" + c.gettiempoDisponibleEnDias() + ";" + c.getdescripcion()
-                            + ";" + c.getedadMinima());
+                    writer.println("C;" +
+                            c.getlugar() + ";" +
+                            c.getcapacidadMax() + ";" +
+                            c.getminimoEmpleados() + ";" +
+                            c.gettipoExclusividad() + ";" +
+                            c.gettiempoDisponibleEnDias() + ";" +
+                            c.getdescripcion() + ";" +
+                            c.getesEvento() + ";" +
+                            c.getedadMinima() + ";" +
+                            c.getclimaExtremo());
+                } else {
+                    System.out.println("Tipo de atracción no reconocida. No se guardó: " + a.getlugar());
                 }
             }
-            System.out.println("✅ Atracciones guardadas exitosamente en: " + nombreArchivo);
+            System.out.println("Atracciones guardadas exitosamente en: " + atraccionesP);
         } catch (IOException e) {
-            System.out.println("❌ Error al guardar las atracciones: " + e.getMessage());
+            System.out.println("Error al guardar las atracciones: " + e.getMessage());
         }
     }
-
-
 }
