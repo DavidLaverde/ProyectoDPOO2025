@@ -1,22 +1,25 @@
-package main;
+package scr.main;
 
-import personas.Administrador;
-import personas.Empleado;
-import atracciones.Atraccion;
-import atracciones.Mecanica;
-import atracciones.Cultural;
+import scr.personas.Administrador;
+import scr.personas.Empleado;
+import scr.atracciones.Atraccion;
+import scr.atracciones.Mecanica;
+import scr.atracciones.Cultural;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDateTime;
+import java.io.File;
 
 public class Main {
 	public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Empleado> empleados = new ArrayList<>();
         ArrayList<Atraccion> atracciones = new ArrayList<>();
+        cargarAtracciones(atracciones, "atraccionesP.txt");
+        cargarEmpleados(empleados, "empleadosP.txt");
 
         Administrador admin = new Administrador(1, "Admin Juan");
 
@@ -83,6 +86,7 @@ public class Main {
                     } while (!turno.equalsIgnoreCase("fin"));
                     Empleado nuevo = new Empleado(idEmp, lugar, cocinero, cargos, manejoMec, manejoMecAltos, turnos);
                     admin.añadirEmpleado(empleados, nuevo);
+                    guardarEmpleados(empleados, "empleados.txt");
                     break;
 
                 case 3:
@@ -161,6 +165,7 @@ public class Main {
                 	empEditar.setturno(nuevosTurnos);
 
                 	System.out.println("Empleado actualizado correctamente.");
+                	guardarEmpleados(empleados, "empleados.txt");
                 	break;
 
                 case 4:
@@ -172,6 +177,7 @@ public class Main {
                     } else {
                         System.out.println("Empleado no encontrado.");
                     }
+                    guardarEmpleados(empleados, "empleados.txt");
                     break;
 
                 case 5:
@@ -246,6 +252,7 @@ public class Main {
                 	    );
                 	    admin.añadirAtraccion(atracciones, nuevaMec);
                 	    System.out.println("Atracción mecánica creada exitosamente.");
+                	    guardarAtracciones(atracciones, "atracciones.txt");
 
                 	} else {
                 	    // ATRACCIÓN CULTURAL
@@ -253,6 +260,7 @@ public class Main {
                 	        tipoExclusividad, tiempo, desc, esEvento, edadMinima, climaExtremo);
                 	    admin.añadirAtraccion(atracciones, nuevaCultural);
                 	    System.out.println("Atracción cultural creada exitosamente.");
+                	    guardarAtracciones(atracciones, "atracciones.txt");
                 	}
                 	break;
 
@@ -309,6 +317,7 @@ public class Main {
                 	atraccionEditar.setdescripcion(nuevaDescripcion);
 
                 	System.out.println("\n Atracción actualizada exitosamente.");
+                	guardarAtracciones(atracciones, "atracciones.txt");
                 	break;
 
 
@@ -318,17 +327,24 @@ public class Main {
                     Atraccion atrDel = buscarAtraccion(atracciones, lugarDel);
                     if (atrDel != null) {
                         admin.removerAtraccion(atracciones, atrDel);
+                        guardarAtracciones(atracciones, "atracciones.txt");
                     } else {
                         System.out.println("Atracción no encontrada.");
                     }
                     break;
 
                 case 0:
-                    System.out.println("Guardando atracciones en archivo...");
+                    System.out.println("Guardando datos...");
 
+                    // Guardar atracciones en archivo
                     guardarAtracciones(atracciones, "atracciones.txt");
 
-                    System.out.println("Saliendo del programa. ");
+                    // Guardar empleados en archivo
+                    guardarEmpleados(empleados, "empleados.txt");
+
+                    System.out.println("Datos guardados correctamente.");
+                    System.out.println("Saliendo del programa");
+
                     break;
             }
 
@@ -351,6 +367,62 @@ public class Main {
         }
         return null;
     }
+    
+    public static void cargarAtracciones(ArrayList<Atraccion> atracciones, String nombreArchivo) {
+        File archivo = new File(nombreArchivo);
+        if (!archivo.exists()) {
+            System.out.println("No se encontró el archivo de atracciones. Se creará uno nuevo al guardar.");
+            return;
+        }
+
+        try (Scanner lector = new Scanner(archivo)) {
+            while (lector.hasNextLine()) {
+                String linea = lector.nextLine();
+                String[] partes = linea.split(";");
+
+                String tipo = partes[0]; // M o C
+
+                int lugar = Integer.parseInt(partes[1]);
+                int capacidadMax = Integer.parseInt(partes[2]);
+                int minimoEmpleados = Integer.parseInt(partes[3]);
+                String tipoExclusividad = partes[4];
+                int tiempoDisponible = Integer.parseInt(partes[5]);
+                String descripcion = partes[6];
+
+                if (tipo.equals("M")) {
+                    // Atracción Mecánica
+                    double alturaMax = Double.parseDouble(partes[7]);
+                    double alturaMin = Double.parseDouble(partes[8]);
+                    double pesoMax = Double.parseDouble(partes[9]);
+                    double pesoMin = Double.parseDouble(partes[10]);
+                    String nivelRiesgo = partes[11];
+
+                    Mecanica m = new Mecanica(lugar, capacidadMax, minimoEmpleados, tipoExclusividad,
+                            tiempoDisponible, descripcion, alturaMax, alturaMin, pesoMax, pesoMin, nivelRiesgo);
+                    atracciones.add(m);
+
+                } else if (tipo.equals("C")) {
+                    // Atracción Cultural
+                    boolean esEvento = Boolean.parseBoolean(partes[7]);
+                    int edadMinima = Integer.parseInt(partes[8]);
+                    boolean climaExtremo = Boolean.parseBoolean(partes[9]);
+
+                    Cultural c = new Cultural(lugar, capacidadMax, minimoEmpleados, tipoExclusividad,
+                            tiempoDisponible, descripcion, esEvento, edadMinima, climaExtremo);
+                    atracciones.add(c);
+                } else {
+                    System.out.println("⚠️ Tipo de atracción no reconocido en la línea: " + linea);
+                }
+            }
+
+            System.out.println("📥 Atracciones cargadas correctamente desde el archivo.");
+        } catch (IOException e) {
+            System.out.println("❌ Error al leer atracciones: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error al interpretar datos de atracción: " + e.getMessage());
+        }
+    }
+
     
     public static void guardarAtracciones(ArrayList<Atraccion> atracciones, String atraccionesP) {
         try (PrintWriter writer = new PrintWriter(atraccionesP)) {
@@ -388,6 +460,57 @@ public class Main {
             System.out.println("Atracciones guardadas exitosamente en: " + atraccionesP);
         } catch (IOException e) {
             System.out.println("Error al guardar las atracciones: " + e.getMessage());
+        }
+    }
+    
+    public static void guardarEmpleados(ArrayList<Empleado> empleados, String nombreArchivo) {
+        try (PrintWriter writer = new PrintWriter(nombreArchivo)) {
+            for (Empleado e : empleados) {
+                String cargos = String.join(",", e.getcargo());
+                String mecanicasAltas = String.join(",", e.getmanejoMecAlto());
+                String turnos = String.join(",", e.getturno());
+
+                writer.println(e.getidEmpleado() + ";" +
+                        e.getlugarDeTrabajo() + ";" +
+                        e.getcocinero() + ";" +
+                        cargos + ";" +
+                        e.getmanejoMec() + ";" +
+                        mecanicasAltas + ";" +
+                        turnos);
+            }
+            System.out.println("Empleados guardados exitosamente en: " + nombreArchivo);
+        } catch (IOException e) {
+            System.out.println("Error al guardar empleados: " + e.getMessage());
+        }
+    }
+    
+    public static void cargarEmpleados(ArrayList<Empleado> empleados, String nombreArchivo) {
+        File archivo = new File(nombreArchivo);
+        if (!archivo.exists()) {
+            System.out.println("📂 No se encontró el archivo de empleados, se creará uno nuevo.");
+            return;
+        }
+
+        try (Scanner lector = new Scanner(archivo)) {
+            while (lector.hasNextLine()) {
+                String linea = lector.nextLine();
+                String[] partes = linea.split(";");
+
+                int id = Integer.parseInt(partes[0]);
+                int lugar = Integer.parseInt(partes[1]);
+                boolean cocinero = Boolean.parseBoolean(partes[2]);
+
+                ArrayList<String> cargos = new ArrayList<>(List.of(partes[3].split(",")));
+                boolean manejaMec = Boolean.parseBoolean(partes[4]);
+                ArrayList<String> mecanicasAltas = new ArrayList<>(List.of(partes[5].split(",")));
+                ArrayList<String> turnos = new ArrayList<>(List.of(partes[6].split(",")));
+
+                Empleado e = new Empleado(id, lugar, cocinero, cargos, manejaMec, mecanicasAltas, turnos);
+                empleados.add(e);
+            }
+            System.out.println("Empleados cargados correctamente desde el archivo.");
+        } catch (IOException e) {
+            System.out.println("Error al leer empleados: " + e.getMessage());
         }
     }
 }

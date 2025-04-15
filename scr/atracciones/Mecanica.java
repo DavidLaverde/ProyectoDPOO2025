@@ -1,4 +1,4 @@
-package atracciones;
+package scr.atracciones;
 
 public class Mecanica extends Atraccion {
     public double alturaMax;

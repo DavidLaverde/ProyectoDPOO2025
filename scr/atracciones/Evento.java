@@ -1,4 +1,4 @@
-package atracciones;
+package scr.atracciones;
 
 import java.time.LocalDateTime;
 

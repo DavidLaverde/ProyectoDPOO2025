@@ -1,4 +1,4 @@
-package atracciones;
+package scr.atracciones;
 
 public class LugarDeServicio extends Atraccion {
     private String tipo;

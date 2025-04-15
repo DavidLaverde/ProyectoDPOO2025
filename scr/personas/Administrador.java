@@ -1,11 +1,11 @@
-package personas;
+package scr.personas;
 
 import java.util.ArrayList;
-import atracciones.Atraccion;
-import atracciones.Cultural;
-import atracciones.Evento;
-import atracciones.LugarDeServicio;
-import atracciones.Mecanica;
+import scr.atracciones.Atraccion;
+import scr.atracciones.Cultural;
+import scr.atracciones.Evento;
+import scr.atracciones.LugarDeServicio;
+import scr.atracciones.Mecanica;
 
 public class Administrador {
     private int idAdmin;

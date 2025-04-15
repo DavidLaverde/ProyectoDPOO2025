@@ -1,4 +1,4 @@
-package personas;
+package scr.personas;
 import java.util.ArrayList;
 
 public class Empleado {
@@ -42,7 +42,7 @@ public class Empleado {
 		return manejoMec;
 	}
 	
-	public ArrayList<String> getmanejoMenAlto() {
+	public ArrayList<String> getmanejoMecAlto() {
 		return manejoMecAlto;
 	}
 	
