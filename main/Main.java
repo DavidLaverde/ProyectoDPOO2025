@@ -178,44 +178,89 @@ public class Main {
                     break;
 
                 case 6:
-                    System.out.println("Lugar:");
-                    int lugarAtr = scanner.nextInt();
-                    System.out.println("Capacidad máx:");
-                    int cap = scanner.nextInt();
-                    System.out.println("Mín empleados:");
-                    int minEmp = scanner.nextInt();
-                    System.out.println("Tipo discapacidad:");
-                    int tipoDis = scanner.nextInt();
-                    System.out.println("Tiempo duración (minutos):");
-                    int tiempo = scanner.nextInt();
-                    scanner.nextLine();
-                    System.out.println("Descripción:");
-                    String desc = scanner.nextLine();
-                    Atraccion nuevaAtr = new Atraccion(lugarAtr, cap, minEmp, tipoDis, tiempo, desc);
-                    admin.añadirAtraccion(atracciones, nuevaAtr);
-                    break;
+                	System.out.println("Lugar:");
+                	int lugarAtr = scanner.nextInt();
+
+                	System.out.println("Capacidad máxima:");
+                	int cap = scanner.nextInt();
+
+                	System.out.println("Mínimo de empleados:");
+                	int minEmp = scanner.nextInt();
+
+                	scanner.nextLine(); // Limpiar buffer antes de Strings
+
+                	System.out.println("Tipo de exclusividad (Familiar, Oro, Diamante):");
+                	String tipoExclusividad = scanner.nextLine();
+
+                	System.out.println("Tiempo disponible en días:");
+                	int tiempo = scanner.nextInt();
+                	scanner.nextLine();
+
+                	System.out.println("Descripción de la atracción:");
+                	String desc = scanner.nextLine();
+
+                	Atraccion nuevaAtr = new Atraccion(lugarAtr, cap, minEmp, tipoExclusividad, tiempo, desc);
+                	admin.añadirAtraccion(atracciones, nuevaAtr);
+
+                	System.out.println("✅ Atracción creada exitosamente.");
+                	break;
+
 
                 case 7:
-                    System.out.println("Lugar de atracción a editar:");
-                    int lugarEdit = scanner.nextInt();
-                    Atraccion atrEdit = buscarAtraccion(atracciones, lugarEdit);
-                    if (atrEdit != null) {
-                        System.out.println("Nueva capacidad:");
-                        int nuevaCap = scanner.nextInt();
-                        System.out.println("Nuevo mínimo empleados:");
-                        int nuevoMin = scanner.nextInt();
-                        System.out.println("Nuevo tipo discapacidad:");
-                        int nuevoDis = scanner.nextInt();
-                        System.out.println("Nuevo tiempo duración:");
-                        int nuevoTiempo = scanner.nextInt();
-                        scanner.nextLine();
-                        System.out.println("Nueva descripción:");
-                        String nuevaDesc = scanner.nextLine();
-                        admin.editarAtraccion(atrEdit, nuevaCap, nuevoMin, nuevoDis, nuevoTiempo, nuevaDesc);
-                    } else {
-                        System.out.println("Atracción no encontrada.");
-                    }
-                    break;
+                	System.out.println("Ingrese el número de lugar de la atracción que desea editar:");
+                	int lugarEditar = scanner.nextInt();
+                	scanner.nextLine(); // Limpiar buffer
+
+                	Atraccion atraccionEditar = null;
+                	for (Atraccion a : atracciones) {
+                	    if (a.getlugar() == lugarEditar) {
+                	        atraccionEditar = a;
+                	        break;
+                	    }
+                	}
+
+                	if (atraccionEditar == null) {
+                	    System.out.println("Atracción no encontrada.");
+                	    break;
+                	}
+
+                	// Mostrar datos actuales
+                	System.out.println("\n--- Datos actuales de la atracción ---");
+                	System.out.println("Capacidad máxima: " + atraccionEditar.getcapacidadMax());
+                	System.out.println("Mínimo de empleados: " + atraccionEditar.getminimoEmpleados());
+                	System.out.println("Tipo de exclusividad: " + atraccionEditar.gettipoExclusividad());
+                	System.out.println("Tiempo disponible en días: " + atraccionEditar.gettiempoDisponibleEnDias());
+                	System.out.println("Descripción: " + atraccionEditar.getdescripcion());
+
+                	// Editar datos
+                	System.out.println("\n--- Ingrese los nuevos valores ---");
+
+                	System.out.print("Nueva capacidad máxima: ");
+                	int nuevaCapacidad = scanner.nextInt();
+                	scanner.nextLine();
+                	atraccionEditar.setcapacidadMax(nuevaCapacidad);
+
+                	System.out.print("Nuevo mínimo de empleados: ");
+                	int nuevoMinimo = scanner.nextInt();
+                	scanner.nextLine();
+                	atraccionEditar.setminimoEmpleados(nuevoMinimo);
+
+                	System.out.print("Nuevo tipo de exclusividad: ");
+                	String nuevaExclusividad = scanner.nextLine();
+                	atraccionEditar.settipoExclusividad(nuevaExclusividad);
+
+                	System.out.print("Nuevo tiempo disponible en días: ");
+                	int nuevoTiempo = scanner.nextInt();
+                	scanner.nextLine();
+                	atraccionEditar.settiempoDisponibleEnDias(nuevoTiempo);
+
+                	System.out.print("Nueva descripción: ");
+                	String nuevaDescripcion = scanner.nextLine();
+                	atraccionEditar.setdescripcion(nuevaDescripcion);
+
+                	System.out.println("\n✅ Atracción actualizada exitosamente.");
+                	break;
+
 
                 case 8:
                     System.out.println("Lugar de la atracción a eliminar:");
