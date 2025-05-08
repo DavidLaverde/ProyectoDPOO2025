@@ -48,16 +48,27 @@ public class Main {
                     break;
 
                 case 2:
+                	System.out.println("Nombre del empleado:");
+                	String nombre = scanner.nextLine();
+                	
+                	System.out.println("Correo del empleado:");
+                	String correo = scanner.nextLine();
+                	
+                	System.out.println("Contraseña del empleado:");
+                	String contrasena = scanner.nextLine();
+                	
                     System.out.println("Ingrese ID del empleado:");
                     int idEmp = scanner.nextInt();
+                    
                     System.out.println("Lugar de trabajo:");
                     int lugar = scanner.nextInt();
                     scanner.nextLine();
+                    
                     System.out.println("¿Es cocinero? (true/false):");
                     boolean cocinero = scanner.nextBoolean();
                     scanner.nextLine();
 
-                    ArrayList<String> puestos = new ArrayList<>();
+                    ArrayList<String> puestos = new ArrayList<String>();
                     String puesto;
                     do {
                         System.out.println("Ingrese un puesto (escriba 'fin' para terminar):");
@@ -71,7 +82,7 @@ public class Main {
                     boolean manejaMec = scanner.nextBoolean();
                     scanner.nextLine();
 
-                    ArrayList<String> manejaMecAltos = new ArrayList<>();
+                    ArrayList<String> manejaMecAltos = new ArrayList<String>();
                     String manejaMecAlto;
                     do {
                         System.out.println("Ingrese una atracción mecánica compleja (escriba 'fin' para terminar):");
@@ -81,7 +92,7 @@ public class Main {
                         }
                     } while (!manejaMecAlto.equalsIgnoreCase("fin"));
 
-                    ArrayList<String> turnos = new ArrayList<>();
+                    ArrayList<String> turnos = new ArrayList<String>();
                     String turno;
                     do {
                         System.out.println("Ingrese un turno (escriba 'fin' para terminar):");
@@ -91,7 +102,15 @@ public class Main {
                         }
                     } while (!turno.equalsIgnoreCase("fin"));
 
-                    Empleado nuevo = new Empleado(idEmp, lugar, cocinero, puestos, manejaMec, manejaMecAltos, turnos);
+                    Empleado nuevo = new Empleado(
+                    	    nombre, correo, contrasena,
+                    	    idEmp, lugar,
+                    	    puestos,           
+                    	    cocinero,          
+                    	    manejaMec,         
+                    	    manejaMecAltos,    
+                    	    turnos             
+                    	);
                     admin.añadirEmpleado(empleados, nuevo);
                     guardarEmpleados(empleados, "empleados.txt");
                     break;
@@ -490,21 +509,35 @@ public class Main {
                 String linea = lector.nextLine();
                 String[] partes = linea.split(";");
 
-                int id = Integer.parseInt(partes[0]);
-                int lugar = Integer.parseInt(partes[1]);
-                boolean cocinero = Boolean.parseBoolean(partes[2]);
+                // Leer datos en orden correcto
+                String nombre = partes[0];
+                String correo = partes[1];
+                String contrasena = partes[2];
+                int id = Integer.parseInt(partes[3]);
+                int lugar = Integer.parseInt(partes[4]);
+                boolean cocinero = Boolean.parseBoolean(partes[5]);
+                ArrayList<String> cargos = new ArrayList<>(List.of(partes[6].split(",")));
+                boolean manejaMec = Boolean.parseBoolean(partes[7]);
+                ArrayList<String> mecanicasAltas = new ArrayList<>(List.of(partes[8].split(",")));
+                ArrayList<String> turnos = new ArrayList<>(List.of(partes[9].split(",")));
 
-                ArrayList<String> cargos = new ArrayList<>(List.of(partes[3].split(",")));
-                boolean manejaMec = Boolean.parseBoolean(partes[4]);
-                ArrayList<String> mecanicasAltas = new ArrayList<>(List.of(partes[5].split(",")));
-                ArrayList<String> turnos = new ArrayList<>(List.of(partes[6].split(",")));
+                Empleado e = new Empleado(
+                    nombre, correo, contrasena,
+                    id, lugar,
+                    cargos,
+                    cocinero,
+                    manejaMec,
+                    mecanicasAltas,
+                    turnos
+                );
 
-                Empleado e = new Empleado(id, lugar, cocinero, cargos, manejaMec, mecanicasAltas, turnos);
                 empleados.add(e);
             }
-            System.out.println("Empleados cargados correctamente desde el archivo.");
+            System.out.println("✅ Empleados cargados correctamente desde el archivo.");
         } catch (IOException e) {
-            System.out.println("Error al leer empleados: " + e.getMessage());
+            System.out.println("❌ Error al leer empleados: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("❌ Error al procesar datos de empleado: " + e.getMessage());
         }
     }
 }

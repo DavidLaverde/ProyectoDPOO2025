@@ -5,22 +5,20 @@ import java.util.ArrayList;
 public class Empleado extends Usuario {
     private int idEmpleado;
     private int lugarTrabajo;
-    private double salario;
-    private ArrayList<String> puesto;
     private boolean esCocinero;
+    private ArrayList<String> puesto;
     private boolean manejaMec;
     private ArrayList<String> manejaMecAlto;
     private ArrayList<String> turno;
 
-    public Empleado(String nombre, String correo, String contraseña, int idEmpleado, int lugarTrabajo, double salario,
+    public Empleado(String nombre, String correo, String contraseña, int idEmpleado, int lugarTrabajo,
     		ArrayList<String> puesto, boolean esCocinero, boolean manejaMecanicos,
     		ArrayList<String> manejaMecAlto, ArrayList<String> turno) {
         super(nombre, correo, contraseña);
         this.idEmpleado = idEmpleado;
         this.lugarTrabajo = lugarTrabajo;
-        this.salario = salario;
-        this.puesto = puesto;
         this.esCocinero = esCocinero;
+        this.puesto = puesto;
         this.manejaMec = manejaMecanicos;
         this.manejaMecAlto = manejaMecAlto;
         this.turno = turno;
@@ -33,10 +31,6 @@ public class Empleado extends Usuario {
 
     public int getLugarTrabajo() {
         return lugarTrabajo;
-    }
-
-    public double getSalario() {
-        return salario;
     }
 
     public ArrayList<String> getPuesto() {
@@ -59,13 +53,9 @@ public class Empleado extends Usuario {
         return turno;
     }
 
-    // Setters
+    // Setters    
     public void setLugarDeTrabajo(int lugarTrabajo) {
         this.lugarTrabajo = lugarTrabajo;
-    }
-
-    public void setSalario(double salario) {
-        this.salario = salario;
     }
 
     public void setPuesto(ArrayList<String> puesto) {
@@ -93,9 +83,8 @@ public class Empleado extends Usuario {
         return "Empleado{" +
                 "idEmpleado=" + idEmpleado +
                 ", lugarTrabajo='" + lugarTrabajo + '\'' +
-                ", salario=" + salario +
-                ", puesto='" + puesto + '\'' +
                 ", esCocinero=" + esCocinero +
+                ", puesto='" + puesto + '\'' +
                 ", manejaMecanicos=" + manejaMec +
                 ", manejaMecanicosAltoRiesgo=" + manejaMecAlto +
                 ", turno='" + turno + '\'' +
