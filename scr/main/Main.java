@@ -193,7 +193,9 @@ public class Main {
                         System.out.println("Empleado no encontrado.");
                     }
                     guardarEmpleados(empleados, "empleados.txt");
-                    break;                case 5:
+                    break;                
+                    
+                case 5:
                 	System.out.println("--- Atracciones Registradas ---");
                 	for (Atraccion a : atracciones) {
                 	    String tipo = a instanceof Mecanica ? "Mecánica" :
