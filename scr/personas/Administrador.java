@@ -3,17 +3,25 @@ package scr.personas;
 import java.util.ArrayList;
 import scr.atracciones.Atraccion;
 
-public class Administrador {
+public class Administrador extends Usuario {
     private int idAdmin;
     private String nombre;
     private String correo;
     private String contraseña;
 
     public Administrador(int idAdmin, String nombre, String correo, String contraseña) {
+        super(nombre, correo, contraseña); // Call the appropriate Usuario constructor
         this.idAdmin = idAdmin;
         this.nombre = nombre;
         this.correo = correo;
         this.contraseña = contraseña;
+    }
+
+    public Administrador(String nombre2, String user, String pass) {
+        super(nombre2, user, pass); // Call the appropriate Usuario constructor
+        this.nombre = nombre2;
+        this.correo = user;
+        this.contraseña = pass;
     }
 
     // Getters y Setters

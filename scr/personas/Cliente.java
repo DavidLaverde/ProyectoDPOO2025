@@ -10,6 +10,10 @@ public class Cliente extends Usuario {
         this.metodoPago = metodoPago;
     }
 
+    public Cliente(String nombre, String user, String pass) {
+        super(nombre, user, pass);
+    }
+
     // Getters
     public int getEdad() {
         return edad;

@@ -1,4 +1,4 @@
-package Venta;
+package scr.main.Venta;
 
 public class Pago {
     private int idTransaccion;

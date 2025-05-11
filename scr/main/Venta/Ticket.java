@@ -1,4 +1,4 @@
-package Venta;
+package scr.main.Venta;
 
 import java.time.LocalDateTime;
 

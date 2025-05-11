@@ -24,6 +24,10 @@ public class Empleado extends Usuario {
         this.turno = turno;
     }
 
+    public Empleado(String nombre, String user, String pass) {
+        super(nombre, user, pass);
+    }
+
     // Getters
     public int getIdEmpleado() {
         return idEmpleado;
