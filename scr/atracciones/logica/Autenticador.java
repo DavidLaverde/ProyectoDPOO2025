@@ -12,6 +12,7 @@ import java.util.HashMap;
 public class Autenticador {
 
     private static final String ARCHIVO_EMPLEADOS = "empleadosP.txt";
+    private static final String ARCHIVO_ADMINS = "adminsP.txt";
 
     public static Usuario autenticar(String usuario, String contrasena, String tipo) {
         try (BufferedReader br = new BufferedReader(new FileReader(ARCHIVO_EMPLEADOS))) {
@@ -20,11 +21,11 @@ public class Autenticador {
                 String[] partes = linea.split(";");
                 if (partes.length >= 4) {
                     String nombre = partes[0];
-                    String user = partes[1];
-                    String pass = partes[2];
+                    String correo = partes[1];
+                    String contrasenia = partes[2];
                     String rol = partes[3];
 
-                    if (usuario.equals(user) && contrasena.equals(pass) && rol.equalsIgnoreCase(tipo)) {
+                    if (usuario.equals(nombre) && contrasena.equals(correo) && rol.equalsIgnoreCase(tipo)) {
                         switch (rol.toLowerCase()) {
                             case "administrador": return new Administrador(nombre, user, pass);
                             case "empleado": return new Empleado(nombre, user, pass);

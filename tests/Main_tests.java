@@ -22,7 +22,7 @@ class Main_test {
     void setUp() {
         empleados = new ArrayList<>();
         atracciones = new ArrayList<>();
-        admin = new Administrador(1, "Admin Juan", "admin@mail.com", "1234");
+        admin = new Administrador(1, "Juan", "admin@gmail.com", "1234");
     }
 
     @Test
@@ -72,14 +72,14 @@ class Main_test {
         empleado.setCocinero(true);
 
         ArrayList<String> nuevosPuestos = new ArrayList<>();
-        nuevosPuestos.add("Supervisor");
+        nuevosPuestos.add("Admin");
         empleado.setPuesto(nuevosPuestos);
 
         // Validar cambios
         assertEquals(10, empleado.getLugarTrabajo());
         assertTrue(empleado.getEsCocinero());
         assertEquals(1, empleado.getPuesto().size());
-        assertEquals("Supervisor", empleado.getPuesto().get(0));
+        assertEquals("Admin", empleado.getPuesto().get(0));
     }
 
     @Test
