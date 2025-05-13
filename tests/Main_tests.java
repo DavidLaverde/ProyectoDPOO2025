@@ -22,7 +22,7 @@ class Main_test {
     void setUp() {
         empleados = new ArrayList<>();
         atracciones = new ArrayList<>();
-        admin = new Administrador(1, "Juan", "admin@gmail.com", "1234");
+        admin = new Administrador("Juan", "admin@gmail.com", "1234", 1);
     }
 
     @Test

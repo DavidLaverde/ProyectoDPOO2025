@@ -21,7 +21,7 @@ public class Main {
         cargarAtracciones(atracciones, "atraccionesP.txt");
         cargarEmpleados(empleados, "empleadosP.txt");
 
-        Administrador admin = new Administrador(1, "Admin Juan", null, null);
+        Administrador admin = new Administrador("Juan", "admin@gmail.com", "1234", 1);
 
         int opcion;
         do {

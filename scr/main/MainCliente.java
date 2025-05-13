@@ -16,10 +16,12 @@ public class MainCliente {
         while (cliente == null) {
             System.out.print("Usuario: ");
             String user = scanner.nextLine();
+            System.out.print("Correo: ");
+            String correo = scanner.nextLine();
             System.out.print("Contraseña: ");
             String pass = scanner.nextLine();
 
-            cliente = Autenticador.autenticar(user, pass, "cliente");
+            cliente = Autenticador.autenticarC(user, correo, pass);
             if (cliente == null) {
                 System.out.println("Credenciales incorrectas. Intente de nuevo.\n");
             }

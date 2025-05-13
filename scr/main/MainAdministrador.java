@@ -12,14 +12,19 @@ public class MainAdministrador {
         System.out.println("=== Bienvenido al sistema del Administrador ===");
 
         // Autenticación
-        Usuario admin = null;
+        Administrador admin = null;
         while (admin == null) {
             System.out.print("Usuario: ");
             String user = scanner.nextLine();
+            System.out.print("Correo: ");
+            String correo = scanner.nextLine();
             System.out.print("Contraseña: ");
             String pass = scanner.nextLine();
+            System.out.print("Contraseña: ");
+            String id = scanner.nextLine();
+            
 
-            admin = Autenticador.autenticar(user, pass, "administrador");
+            admin = Autenticador.autenticarA(user, correo, pass, id);
             if (admin == null) {
                 System.out.println("Credenciales incorrectas. Intente de nuevo.\n");
             }
