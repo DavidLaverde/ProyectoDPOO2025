@@ -82,7 +82,7 @@ public class VentanaLogin extends JFrame {
                 Usuario emp = Autenticador.autenticarE(usuario, correo, pass);
                 if (emp != null) {
                     JOptionPane.showMessageDialog(this, "✅ Bienvenido, empleado " + emp.getNombre());
-                    // new VentanaEmpleado(emp).setVisible(true);
+                    new VentanaEmpleado((Empleado) emp).setVisible(true);
                     dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, "❌ Datos incorrectos.");
@@ -93,7 +93,7 @@ public class VentanaLogin extends JFrame {
                 Usuario cli = Autenticador.autenticarC(usuario, correo, pass);
                 if (cli != null) {
                     JOptionPane.showMessageDialog(this, "✅ Bienvenido, cliente " + cli.getNombre());
-                    // new VentanaCliente(cli).setVisible(true);
+                    new VentanaCliente(cli).setVisible(true);
                     dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, "❌ Datos incorrectos.");

@@ -1,8 +1,14 @@
 package scr.gui;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Font;
+import java.awt.GridLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 public class VentanaInicio extends JFrame {
 
@@ -21,16 +27,18 @@ public class VentanaInicio extends JFrame {
         JButton btnCliente = new JButton("Cliente");
 
         btnAdmin.addActionListener(e -> {
-            new VentanaAdmin().setVisible(true);
+            new VentanaLogin().setVisible(true);
             dispose();
         });
 
         btnEmpleado.addActionListener(e -> {
-            JOptionPane.showMessageDialog(null, "Interfaz de empleado aún no disponible.");
+            new VentanaLogin().setVisible(true); 
+            dispose(); 
         });
 
         btnCliente.addActionListener(e -> {
-            JOptionPane.showMessageDialog(null, "Interfaz de cliente aún no disponible.");
+            new VentanaLogin().setVisible(true); 
+            dispose(); 
         });
 
         JPanel panel = new JPanel(new GridLayout(4, 1, 10, 10));
@@ -46,4 +54,3 @@ public class VentanaInicio extends JFrame {
         SwingUtilities.invokeLater(() -> new VentanaInicio().setVisible(true));
     }
 }
-
