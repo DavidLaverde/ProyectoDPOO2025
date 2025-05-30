@@ -1,5 +1,9 @@
 package scr.personas;
 
+import java.util.ArrayList;
+import java.util.List;
+import scr.main.Venta.Ticket;
+
 public class Usuario {
     private String nombre;
     private String correo;
@@ -35,6 +39,16 @@ public class Usuario {
 
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
+    }
+    
+    private List<Ticket> historialTiquetes = new ArrayList<>();
+    
+    public void agregarTiquete(Ticket t) {
+        historialTiquetes.add(t);
+    }
+
+    public List<Ticket> getHistorialTiquetes() {
+        return historialTiquetes;
     }
 
     @Override

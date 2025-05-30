@@ -10,6 +10,8 @@ public class Ticket {
     private String esIndividual; // sí/no
     private LocalDateTime diaFastpass;
     private String estado;
+    private String idt;
+    private boolean yaImpreso;
 
     public Ticket(String tipoTicket, boolean esBasico, LocalDateTime inicioValidacion, int tiempoDiasTicketValido, String esIndividual, LocalDateTime diaFastpass) {
         this.tipoTicket = tipoTicket;
@@ -19,6 +21,8 @@ public class Ticket {
         this.esIndividual = esIndividual;
         this.diaFastpass = diaFastpass;
         this.estado = "Activo";
+        this.idt = java.util.UUID.randomUUID().toString();
+        this.yaImpreso = false;
     }
 
     public boolean validar() {
@@ -35,6 +39,10 @@ public class Ticket {
 
     public String getEstado() {
         return estado;
+    }
+    
+    public String getIdt() {
+        return idt;
     }
 
     public String getTipoTicket() {
@@ -59,5 +67,17 @@ public class Ticket {
 
     public int getTiempoDiasTicketValido() {
         return tiempoDiasTicketValido;
+    }
+    
+    public void setId(String idt) {
+        this.idt = idt;
+    }
+
+    public boolean isYaImpreso() {
+        return yaImpreso;
+    }
+
+    public void marcarComoImpreso() {
+        this.yaImpreso = true;
     }
 }

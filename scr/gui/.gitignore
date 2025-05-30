@@ -1,3 +1,8 @@
 /VentanaInicio.class
 /VentanaAdmin.class
 /VentanaLogin.class
+/QRUtils.class
+/VentanaImpresionTicket.class
+/VentanaCliente.class
+/VentanaCompraTiquete.class
+/VentanaHistorialTiquetes.class
