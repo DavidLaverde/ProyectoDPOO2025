@@ -1,18 +1,24 @@
 package scr.atracciones.logica;
 
 import scr.personas.Administrador;
+import scr.personas.Cliente;
 import scr.personas.Usuario;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
+import java.util.HashMap;
 
 public class Autenticador {
 
     private static final String ARCHIVO_EMPLEADOS = "empleadosP.txt";
     private static final String ARCHIVO_ADMINS = "adminsP.txt";
-    private static final String ARCHIVO_CLIENTES = "clientesp";
+    private static final String ARCHIVO_CLIENTES = "clientesp.txt"; // Asegúrate de que tenga extensión
 
-    // Autenticar empleado
+    private static final HashMap<String, Usuario> clientesRegistrados = new HashMap<>();
+
+    // ===============================
+    // === MÉTODOS DE AUTENTICACIÓN ==
+    // ===============================
+
     public static Usuario autenticarE(String usuario, String correo, String contrasena) {
         try (BufferedReader br = new BufferedReader(new FileReader(ARCHIVO_EMPLEADOS))) {
             String linea;
@@ -34,8 +40,7 @@ public class Autenticador {
         }
         return null;
     }
-    
-    //Autenticar Clientes
+
     public static Usuario autenticarC(String usuario, String correo, String contrasena) {
         try (BufferedReader br = new BufferedReader(new FileReader(ARCHIVO_CLIENTES))) {
             String linea;
@@ -53,12 +58,11 @@ public class Autenticador {
                 }
             }
         } catch (Exception e) {
-            System.out.println("❌ Error al autenticar empleado: " + e.getMessage());
+            System.out.println("❌ Error al autenticar cliente: " + e.getMessage());
         }
         return null;
     }
 
-    // Autenticar administrador
     public static Administrador autenticarA(String usuario, String correo, String contrasena, String id) {
         try (BufferedReader br = new BufferedReader(new FileReader(ARCHIVO_ADMINS))) {
             String linea;
@@ -81,5 +85,42 @@ public class Autenticador {
             System.out.println("❌ Error al autenticar administrador: " + e.getMessage());
         }
         return null;
+    }
+
+    // ============================
+    // === MÉTODOS PARA REGISTRO ==
+    // ============================
+
+    public static boolean registrarCliente(String nombre, String correo, String password) {
+        // Verificar si ya existe por correo
+        if (clienteYaExiste(correo)) {
+            return false;
+        }
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(ARCHIVO_CLIENTES, true))) {
+            String linea = nombre + ";" + correo + ";" + password;
+            bw.write(linea);
+            bw.newLine();
+            return true;
+        } catch (IOException e) {
+            System.out.println("❌ Error al registrar cliente: " + e.getMessage());
+            return false;
+        }
+    }
+
+    private static boolean clienteYaExiste(String correo) {
+        try (BufferedReader br = new BufferedReader(new FileReader(ARCHIVO_CLIENTES))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] partes = linea.split(";");
+                if (partes.length >= 2 && partes[1].equalsIgnoreCase(correo)) {
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            // Si no existe el archivo, se asume que no hay clientes
+            return false;
+        }
+        return false;
     }
 }

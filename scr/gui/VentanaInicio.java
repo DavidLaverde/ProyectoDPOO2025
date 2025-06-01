@@ -14,7 +14,7 @@ public class VentanaInicio extends JFrame {
 
     public VentanaInicio() {
         setTitle("Parque de Atracciones");
-        setSize(400, 300);
+        setSize(400, 300); 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -25,6 +25,12 @@ public class VentanaInicio extends JFrame {
         JButton btnAdmin = new JButton("Administrador");
         JButton btnEmpleado = new JButton("Empleado");
         JButton btnCliente = new JButton("Cliente");
+        JButton btnRegistro = new JButton("Registrarse como Cliente");
+
+        btnRegistro.addActionListener(e -> {
+        new VentanaRegistroCliente().setVisible(true);
+        dispose();
+    });
 
         btnAdmin.addActionListener(e -> {
             new VentanaLogin().setVisible(true);
@@ -46,7 +52,8 @@ public class VentanaInicio extends JFrame {
         panel.add(btnAdmin);
         panel.add(btnEmpleado);
         panel.add(btnCliente);
-
+        panel.add(btnRegistro);
+        
         add(panel);
     }
 
